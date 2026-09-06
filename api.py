@@ -6,11 +6,15 @@ from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 app = FastAPI()
 
-CLAVE_SECRETA = "esto-deberia-ser-mas-seguro-en-produccion"
+
+CLAVE_SECRETA = os.getenv("CLAVE_SECRETA")
 ALGORITMO = "HS256"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
